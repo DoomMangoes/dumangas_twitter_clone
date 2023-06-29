@@ -1,3 +1,5 @@
+import 'package:dumangas_twitter_clone/features/auth/view/login_view.dart';
+import 'package:dumangas_twitter_clone/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,12 +11,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      title: 'Twitter Clone',
+      theme: AppTheme.theme,
+      debugShowCheckedModeBanner: false,
+      home: const LoginView(),
     );
   }
 }
