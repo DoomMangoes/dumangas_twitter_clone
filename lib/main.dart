@@ -1,4 +1,5 @@
 import 'package:dumangas_twitter_clone/features/auth/view/login_view.dart';
+import 'package:dumangas_twitter_clone/features/auth/view/signup_view.dart';
 import 'package:dumangas_twitter_clone/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class MainApp extends StatelessWidget {
       title: 'Twitter Clone',
       theme: AppTheme.theme,
       debugShowCheckedModeBanner: false,
-      home: const LoginView(),
+      home: const SignUpView(),
     );
   }
 }
