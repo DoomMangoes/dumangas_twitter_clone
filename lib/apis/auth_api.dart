@@ -1,11 +1,19 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as model;
 import 'package:dumangas_twitter_clone/core/core.dart';
+import 'package:dumangas_twitter_clone/core/providers.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
-
 
 //Appwrite account -> handles services / retrieves data
 //Models user -> accessed data
+
+
+final authAPIProvider = Provider((ref) {
+
+  final account = ref.watch(appwriteAccountProvider);
+  return AuthAPI(account: account);
+});
 
 abstract class IAuthAPI{
 
