@@ -1,4 +1,5 @@
 import 'package:dumangas_twitter_clone/common/common.dart';
+
 import 'package:dumangas_twitter_clone/constants/constants.dart';
 import 'package:dumangas_twitter_clone/features/auth/controller/auth_controller.dart';
 import 'package:dumangas_twitter_clone/features/auth/view/login_view.dart';
@@ -44,9 +45,11 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading =ref.watch(authControllerProvider);
+
     return Scaffold(
       appBar: appBar,
-      body: Center(
+      body: isLoading ? const Loader() : Center(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),

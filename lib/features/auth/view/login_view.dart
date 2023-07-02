@@ -1,22 +1,24 @@
 
 import 'package:dumangas_twitter_clone/common/common.dart';
 import 'package:dumangas_twitter_clone/constants/constants.dart';
+import 'package:dumangas_twitter_clone/features/auth/controller/auth_controller.dart';
 import 'package:dumangas_twitter_clone/features/auth/view/signup_view.dart';
 import 'package:dumangas_twitter_clone/features/auth/widgets/auth_field.dart';
 import 'package:dumangas_twitter_clone/theme/theme.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-class LoginView extends StatefulWidget{
+class LoginView extends ConsumerStatefulWidget{
   static route() =>  MaterialPageRoute(builder: (context) => const LoginView());
   const LoginView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  ConsumerState<LoginView> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _LoginViewState extends ConsumerState<LoginView> {
 
   //Create appbar instance
   final appBar = UIConstants.appBar();
@@ -33,11 +35,22 @@ class _LoginViewState extends State<LoginView> {
 
   }
 
+   void onLogin() {
+
+    ref.read(authControllerProvider.notifier).login(
+      email: emailController.text, 
+      password: passwordController.text, 
+      context: context);
+
+  }
+
   @override
   Widget build(BuildContext context) {
+     final isLoading =ref.watch(authControllerProvider);
+
     return Scaffold(
       appBar: appBar,
-      body: Center(
+      body: isLoading ? const Loader() : Center(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -59,7 +72,7 @@ class _LoginViewState extends State<LoginView> {
                 Align(
                   alignment: Alignment.topRight,
                   child: RoundedSmallButton(
-                    onTap: () {}, 
+                    onTap: onLogin, 
                     label: "Done", 
                   
                   ),
